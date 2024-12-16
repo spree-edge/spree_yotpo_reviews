@@ -1,0 +1,18 @@
+<% if current_store.yotpo_enabled? && current_store.yotpo_script? %>
+  <%= raw current_store.yotpo_script %>
+
+  <div class="yotpo yotpo-main-widget container"
+    data-domain= "<%= current_store.formatted_url %>"
+    data-product-id="<%= @product.id %>"
+    data-name="<%= @product.name %>"
+    data-url="<%= spree.product_url(@product) %>">
+  </div>
+
+  <script>
+    document.addEventListener('turbo:load', function() {
+      if (typeof yotpo !== 'undefined') {
+        yotpo.initWidgets();
+      }
+    });
+  </script>
+<% end %>
